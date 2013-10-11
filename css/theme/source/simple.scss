@@ -20,19 +20,21 @@
 
 
 // Override theme settings (see ../template/settings.scss)
-$mainFont: 'Lato', sans-serif;
-$mainColor: #000;
-$headingFont: 'News Cycle', Impact, sans-serif;
-$headingColor: #000;
+$mainFont: 'Helvetica Neue', sans-serif;
+$mainColor: #333;
+$headingFont: 'Helvetica Neue', sans-serif;
+$headingColor: #333;
 $headingTextShadow: none;
 $headingTextTransform: none;
 $backgroundColor: #fff;
-$linkColor: #00008B;
+$linkColor: #33549f;
 $linkColorHover: lighten( $linkColor, 20% );
 $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
-
-
 
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+.reveal section img {
+	border: 1px solid black;
+}
