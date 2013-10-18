@@ -1,5 +1,33 @@
 # GIT Fundamentals
 
+## Git
+
+  * Dezentral: Gesamtes Repo lokal verfügbar, Effizientes Checkout, Branching, Logs, ...
+  * Nicht-lineare Entwicklung: Branchen sehr einfach und effizient
+  * Sicher: Aktuelle Revisionshash wird Berechnet aus der gesamten History -> Fälschungssicher
+  * Effizient: Einfache Speicherung ähnlich Posix-Dateisystem
+
+## Git vs. X (SVN)
+
+  * Jedes andere "traditionelle" Versionskontrollsystem: File basiert, Delta-Storage
+    * Initial File + Deltas oder Aktuelles File + Deltas
+    * Für Operationen, die mehr als den aktuellen Stand behandeln ineffizient / komplex / langsam
+    * Änderung des Delta-Algorithmus führt zu Änderung des Repo-Dateisystems
+
+  * In traditionellen VCSen: Rename, Copy, Move etc. wird als Operation gespeichert
+    * Problemanfällig, "aufwändig"
+
+## Git
+
+  * File basiert, Snapshot-Speicherung
+    * Jedes File wird (lokal) vollständig vorgehalten
+    * Bei Remote-Operationen Delta-Kompression über das gesamte Repo
+
+  * Berechnung von Hashes aus Dateiinhalten und Filegröße
+    * Commit somit Ansammlung von "Hardlinks" und Dateinamen, -berechtigungen
+    * Rename, Move etc. wird aus Diff der Commits extrapoliert
+    * Repo-Dateisystem seit Version 1.0 (Dezember 2005) unverändert
+
 ## Begriffe
 
   * Repository: Sammlung von Commits. Hat eine HEAD-Referenz auf den aktuellen Commit, der im Working Tree vorliegt (ggf. verändert). Sammlung von Branches und Tags, die Commits idenitifieren.
@@ -95,6 +123,8 @@ $ git branch -v
 
   * Tags sind also das gleiche wie Branches, nur haben sie noch ne zusätzliche Beschreibung
   * Alle Aktionen in GIT, die mit Namen (für Branches, Tags) ausgeführt werden, können auch mit Hashes ausgeführt werden
+
+  * `git log HEAD^..HEAD`
 
   * TODO: Diagramme mit Commits, Branches, Tags, Merge; Commit, Tree, Blobs
 
