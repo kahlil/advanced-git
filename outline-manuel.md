@@ -28,6 +28,9 @@
     * Rename, Move etc. wird aus Diff der Commits extrapoliert
     * Repo-Dateisystem seit Version 1.0 (Dezember 2005) unverändert
 
+
+## Plumbing vs Porcelain Features => Unix Prinzip
+
 ## Begriffe
 
   * Repository: Sammlung von Commits. Hat eine HEAD-Referenz auf den aktuellen Commit, der im Working Tree vorliegt (ggf. verändert). Sammlung von Branches und Tags, die Commits idenitifieren.
@@ -42,15 +45,15 @@
 ## Repository
 
   * Dateien werden in Blobs gespeichert
-    * Name vom Blob: SHA1( Dateiname + Dateigröße)
-    * Damit wird jede Datei nur Anhand ihres Inhalts (nicht Meta-Daten) identifiziert
-    * Jede eindeutige Datei wird nur einmal gespeichert, auch wenn über Pulls/Merges/etc. andere Repositories/Branches/etc. in das eigene Repo genommen werden
   * Zustand von dem Repository-Zustand in Baum-Objekten (Tree)
     * Hier sind die Datei-Metadaten enthalten, z.B. Permissions, Datum, ...
 
-  * Daten sind unveränderbar (immutable) in GIT
-
 ## Blob
+
+  * Name vom Blob: SHA1( Dateiname + Dateigröße)
+  * Damit wird jede Datei nur Anhand ihres Inhalts (nicht Meta-Daten) identifiziert
+  * Jede eindeutige Datei wird nur einmal gespeichert, auch wenn über Pulls/Merges/etc. andere Repositories/Branches/etc. in das eigene Repo genommen werden
+  * Daten sind unveränderbar (immutable) in GIT
 
 ~~~
 $ mkdir sample; cd sample
@@ -126,7 +129,13 @@ $ git branch -v
 
   * `git log HEAD^..HEAD`
 
-  * TODO: Diagramme mit Commits, Branches, Tags, Merge; Commit, Tree, Blobs
+## Speicherung
+  
+  * Git trackt Dateien/Trees/Commits über das gesamte Repo
+  * Solange ein Hash für ein Objekt das gleiche ist, wird es nicht doppelt gespeichert
+  * Das gilt für quasi alles, also Commits, Trees, Blobs
+  * Und das gilt über Branches, Tags etc. hinweg!
+  * Deshalb sind diese Operationen auch so "günstig" in Git
 
 ## Branching, Merging und Rebase
 

@@ -40,9 +40,105 @@
 					<h1>Advanced Git</h1>
 					<h3>Git Interna &amp; Best Practices</h3>
 					<p>
-						<small><a href="http://kahlil.co">Kahlil Lechelt</a> &amp; <a href="http://twitter.com/?">Manuel Zamora</a></small>
+						<small><a href="http://kahlil.co">Kahlil Lechelt</a> &amp; <a href="http://zamora.de">Manuel Zamora</a></small>
 					</p>
 				</section>
+
+                <!-- Git Fundamentals -->
+                <section>
+                    <section>
+                        <h2>Prinzipien</h2>
+
+                        <p class="fragment">Dezentral</p>
+                        <p class="fragment">Nicht-lineare Entwicklung</p>
+                        <p class="fragment">Sicher</p>
+                        <p class="fragment">Effizient</p>
+                    </section>
+
+                    <section>
+                        <h3>SVN</h3>
+                        <p>File basiert, Delta-Storage</p>
+                        <!--<p>Copy, Move, Rename als eigene Operation im Commit</p>-->
+                    </section>
+
+                    <section>
+                        <h3>Git</h3>
+                        <p>Hash basiert, Snapshot-Speicherung</p>
+                        <!--<p>Copy, Move, Rename, Diffs werden aus History extrapoliert</p>-->
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Grundlagen</h2>
+                    </section>
+                    <section>
+                        <h3>Plumbing vs Porcelain</h3>
+                    </section>
+                    <section>
+                        <h3>Begriffe</h3>
+                        <p class="fragment">Repository</p>
+                        <p class="fragment">Commit</p>
+                        <p class="fragment">Working Tree</p>
+                        <p class="fragment">HEAD</p>
+                        <p class="fragment">Staging Area / Index</p>
+                        <p class="fragment">master</p>
+                        <p class="fragment">Branch</p>
+                        <p class="fragment">Tag</p>
+                    </section>
+                    <section data-background="img/repo-workingtree-stagingarea.png" data-background-size="75%">
+                    </section>
+                    <section>
+                        <h3>Repository</h3>
+                    </section>
+                    <section data-background="img/commits-trees-blobs.png" data-background-size="70%">
+                    </section>
+                    <section>
+                        <h3>Blob</h3>
+                        <p>ID = SHA ( Dateiinhalt + Dateigröße )</p>
+                        <br />
+                        <p>Jede Datei wird nur einmal gespeichert</p>
+                        <p>Blobs sind unveränderlich</p>
+                    </section>
+                    <section>
+                        <h3>Tree</h3>
+                        <p>ID = SHA ( Blob-Hashes + Tree-Hashes )</p>
+                        <br />
+                        <p>Verzeichniszuordnung</p>
+                        <p>Berechtigungen</p>
+                        <p>Dateiname</p>
+                        <p>Verweis auf untergeordnete Trees</p>
+                        <br />
+                        <p>Trees sind unveränderlich</p>
+                    </section>
+                    <section>
+                        <h3>Commit</h3>
+                        <p>ID = SHA ( Autor + Datum + Trees + Blobs )</p>
+                        <br />
+                        <p>Commits referenzieren 1..n Eltern-Commits</p>
+                        <p>Ein Commit mit mehreren Eltern: Merge-Commit</p>
+                        <p>Ein Commit mit mehreren Kindern: Branch-Knoten</p>
+                        <br />
+                        <p>Alle Commits = History</p>
+                        <br />
+                        <p>Commits sind unveränderlich</p>
+                    </section>
+                    <section data-background="img/history.png" data-background-size="30%"></section>
+                    <section>
+                        <h3>Commit</h3>
+                        <p>Branches: Referenzen auf einen Commit</p>
+                        <p>Tags: Referenzen auf einen Commit</p>
+                        <br />
+                        <p>Referenz: Name für einen Hash</p>
+                    </section>
+                    <section data-background="img/two-commits.png" data-background-size="30%"></section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Branching, Merging & Rebasing</h2>
+                    </section>
+                </section>
 
 				<!-- Anfang: Best Practices -->
 				<section>
