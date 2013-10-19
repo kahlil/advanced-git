@@ -141,44 +141,85 @@
                 </section>
 
 				<!-- Anfang: Best Practices -->
+
+				<section>
+					<h2>Best Practices</h2>
+				</section>
+
 				<section>
 					<section>
 						<h2>Filemode</h2>
-						<p>
-							Bla
-						</p>
+
 
 						<aside class="notes">
 							Notes
 						</aside>
 					</section>
+
+					<section>
+						<code>git config core.filemode true|false</code>
+					</section>
+
+					<section>
+						<blockquote>
+                            If false, the executable bit differences
+                            between the index and the working copy
+                            are ignored; useful on broken filesystems
+                            like FAT. See git-update-index(1).
+                            True by default.
+						</blockquote>
+					</section>
+
 				</section>
 
 				<section>
 					<section>
-						<h2>CRLF</h2>
-						<p>
-							Bla
-						</p>
+						<h2>Zeilenendungen</h2>
+
 
 						<aside class="notes">
 							Notes
 						</aside>
 					</section>
+
+                    <section>
+                        <h3>CRLF vs. LF</h3>
+                    </section>
+
+                    <section>
+                        <h3>.gitattributes</h3>
+                    </section>
+
+                    <section>
+                        <code>text=auto</code>
+                    </section>
+
+                    <section>
+                        <code>text eol=lf</code>
+                    </section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Rebase vs. Merge</h2>
-						<p>
-							Bla
-						</p>
+						<h2>Rebase</h2>
 
+                        <p class="fragment fade-in">Niemals veröffentlichte Commits rebasen.</p>
+                        <p class="fragment fade-in">
+                            <code>
+                                git config branch.autosetuprebase always
+                            </code>
+                        </p>
 						<aside class="notes">
 							Notes
 						</aside>
 					</section>
 				</section>
+
+                <section>
+                    <section>
+                        <h2>Branchen, Branchen, Branchen!</h2>
+                    </section>
+                </section>
 
 				<section>
 					<section>
