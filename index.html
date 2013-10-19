@@ -218,15 +218,69 @@
                 <section>
                     <section>
                         <h2>Branchen, Branchen, Branchen!</h2>
+
+                        <p class="fragment fade-in">
+                            Features, Bugs, Experimente.
+                        </p>
+                        <p class="fragment fade-in">
+                            Müssen nicht gepusht werden.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Stashen, Stashen, Stashen!</h2>
+                    </section>
+
+                    <section>
+                        <code>git stash save "Stashname oder. Beschreibung"</code>
+                    </section>
+
+                    <section data-background-image="img/stashes.png"
+                             data-background-size="800px"></section>
+
+                    <section>
+                        <code>git stash apply stash@{1}</code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>CLI bevor GUI!</h2>
+                    </section>
+
+                    <section>
+                        <h2>Bash Autocomplete</h2>
+                        <p class="fragment fade-in">Git Bash auf Windows</p>
                     </section>
                 </section>
 
 				<section>
 					<section>
-						<h2>Workflows</h2>
-						<p>
-							Bla
-						</p>
+						<h2>Commit Message</h2>
+						<pre>
+<strong class="fragment highlight-red">Capitalized, short (50 chars or less)</strong> summary
+
+More detailed explanatory text, if necessary.  <strong class="fragment highlight-red">Wrap it to about 72
+characters or so.</strong> In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); tools like rebase can get confused if you run the
+two together.
+
+<strong class="fragment highlight-red">Write your commit message in the imperative: "Fix bug" and not "Fixed bug"
+or "Fixes bug."</strong> This convention matches up with commit messages generated
+by commands like git merge and git revert.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, preceded by a
+  single space, with blank lines in between, but conventions vary here
+
+- Use a hanging indent</pre>
 
 						<aside class="notes">
 							Notes
@@ -236,16 +290,165 @@
 
 				<section>
 					<section>
-						<h2>Verschiedenes</h2>
-						<p>
-							Bla
-						</p>
+						<h2>Integration mit Tools</h2>
+						<p class="fragment fade-in">
+                            JIRA
+                        </p>
+                        <p class="fragment fade-in">
+                            Jabber
+                        </p>
+                        <p class="fragment fade-in">
+                            ...
+                        </p>
 
 						<aside class="notes">
 							Notes
 						</aside>
 					</section>
+
+                    <section>
+                        <h2><a href="http://git/gitweb" target="_blank">gitweb</a></h2>
+                    </section>
 				</section>
+
+                <section>
+                    <h2>Nur Fast-Forwards</h2>
+                    <p>
+                        <code>git init --shared</code>
+                    </p>
+                    <p>
+                        initialisiert ein Repo mit
+                    </p>
+                    <p>
+                        <code>"receive.denyNonFastForwards = true"</code>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Remote Unlöschbar</h2>
+                    <p>
+                        <code>"receive.denyDeletes = true"</code>
+                    </p>
+                </section>
+
+                <section>
+                    <h2><code>git log</code> subsets</h2>
+                    <p>
+                        <code>git log branchtomerge ^master</code>
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Workflows</h2>
+                    </section>
+
+                    <section>
+                        <h2>Simple</h2>
+
+                        <p class="fragment fade-in">
+                            <code>
+                                git add .
+                            </code>
+                        </p>
+
+                        <p class="fragment fade-in">
+                            <code>
+                                git commit
+                            </code>
+                        </p>
+
+                        <p class="fragment fade-in">
+                            Commit Message.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Feature-Spezifisch Commiten</h2>
+                        <p class="fragment fade-in">
+                            <code>git status</code>
+                        </p>
+                        <p class="fragment fade-in">
+                            <code>git add filename filename filename</code>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Feingranular Commiten</h2>
+                        <p class="fragment fade-in">
+                            <code>git add -p</code>
+                        </p>
+                    </section>
+
+                    <section data-background-image="img/hunks.png" data-background-size="800px"></section>
+
+                    <section>
+                        <h2>Workflow mit Branches</h2>
+                        <p class="fragment fade-in">
+                            Branches: master, dev, feature-***, bug-***, hotfix-***
+                        </p>
+                        <p class="fragment fade-in">
+                            dev und master leben für immer
+                        </p>
+                        <p class="fragment fade-in">
+                            feature-, bug- und hotfix-Branches werden gelöscht
+                        </p>
+                        <p class="fragment fade-in">
+                            master ist immer sauber, keine direkte Arbeit
+                        </p>
+                        <p class="fragment fade-in">
+                            Nur fast-forward commits nach master
+                        </p>
+                        <p class="fragment fade-in">
+                            dev ist der Hauptentwicklungsbranch
+                        </p>
+                        <p class="fragment fade-in">
+                            dev -> release -> master
+                        </p>
+                    </section>
+
+                    <section data-background-image="img/gitflow.png"
+                             data-background-size="500px">
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Schlusswort</h2>
+                </section>
+
+                <section>
+                    <h2>Links</h2>
+                    <p>
+                    <strong>Scott Chacon's Git Einführung</strong><br>
+                    <a href="http://www.youtube.com/watch?v=ZDR433b0HJY">
+                        Video
+                    </a> &amp; <a href="https://speakerdeck.com/schacon/introduction-to-git">
+                        Slides
+                    </a>
+
+                    </p>
+                    <p>
+                        <strong>Git Bücher (free online)</strong><br>
+                        <a href="http://git-scm.com/book">
+                            Pro Git
+                        </a> &amp; <a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/">
+                            Git Magic
+                        </a>
+                    </p>
+
+                    <p>
+                        <strong>Git Webseite</strong><br>
+                        <a href="http://git-scm.com">git-scm.com</a>
+                    </p>
+
+                    <p>
+                        <strong>Advanced Git Video</strong><br>
+                        <a href="https://vimeo.com/49444883">
+                            Advanced Git mit Tim Berglund
+                        </a>
+                    </p>
+
+                </section>
 
 				<!-- Ende: Best Practices -->
 			</div>

@@ -107,7 +107,7 @@ Further paragraphs come after blank lines.
 
 ### Der einfache Commit
 
-* git add .; git commit -am 'My commit message.'
+* git add .; git commit'
 
 ### Feature-spezifisch committen
 
