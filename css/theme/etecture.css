@@ -131,3 +131,10 @@ body {
 
 .reveal section img {
   border: 1px solid #333; }
+.reveal pre {
+  box-shadow: none; }
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 35px 0;
+  line-height: 1.2em; }
+.reveal p {
+  margin-bottom: 20px; }

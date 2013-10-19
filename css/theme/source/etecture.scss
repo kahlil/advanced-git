@@ -39,6 +39,14 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 	section img {
 		border: 1px solid #333;
 	}
-	h1 {
+	pre {
+		box-shadow: none;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0 0 35px 0;
+		line-height: 1.2em;
+	}
+	p {
+		margin-bottom: 20px;
 	}
 }
