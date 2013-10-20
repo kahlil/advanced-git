@@ -1,6 +1,13 @@
 # GIT Fundamentals
 
-## Git
+  * Vorstellen
+
+# Agenda
+
+  * Agenda
+  * Wer hat noch keine Erfahrung mit Git? 
+
+# Prinzipien
 
   * Dezentral: Gesamtes Repo lokal verfügbar, Effizientes Checkout, Branching, Logs, ...
   * Nicht-lineare Entwicklung: Branchen sehr einfach und effizient
@@ -28,6 +35,7 @@
     * Rename, Move etc. wird aus Diff der Commits extrapoliert
     * Repo-Dateisystem seit Version 1.0 (Dezember 2005) unverändert
 
+## Grundlagen
 
 ## Plumbing vs Porcelain Features => Unix Prinzip
 
@@ -36,11 +44,13 @@
   * Repository: Sammlung von Commits. Hat eine HEAD-Referenz auf den aktuellen Commit, der im Working Tree vorliegt (ggf. verändert). Sammlung von Branches und Tags, die Commits idenitifieren.
   * Commit: Zustand des Working Trees zu einem gewissen Zustand. 
   * Working Tree: Das Arbeitsverzeichnis, in dem ein Git-Repo vorhanden ist
-  * HEAD: Zeigt auf den aktuellen Commit (bzw. Branch) der ausgecheckt ist, unabhängig, ob dieser bereits verändert wurde. 
+  * HEAD: Zeigt auf den aktuellen Commit (bzw. Branch) der ausgecheckt ist, unabhängig, ob dieser bereits verändert wurde. Aber auch der aktuellste Commit eines Branches wird so genannt.
   * Staging Area / Index: Veränderungen im Working Tree werden zuerst im Index registriert, bevor sie commited werden. 
   * Master: Der "Standard"-Branch, der immer vorhanden ist und je nach Konvention in verschiedener Weise genutzt wird.
   * Branch: Zeigt immer auf den aktuellsten Commit eines Entwicklungszweiges (+ Name)
   * Tag: Zeigt immer auf den gleichen Commit innerhalb des Repositories (+ Name, Beschreibung)
+
+  * Ablaufdiagramm: Repository - Working Tree - Staging Area
 
 ## Repository
 
@@ -54,6 +64,39 @@
   * Damit wird jede Datei nur Anhand ihres Inhalts (nicht Meta-Daten) identifiziert
   * Jede eindeutige Datei wird nur einmal gespeichert, auch wenn über Pulls/Merges/etc. andere Repositories/Branches/etc. in das eigene Repo genommen werden
   * Daten sind unveränderbar (immutable) in GIT
+
+
+## Bäume
+
+
+Im Repo also - ein Blob (das File), ein Tree Objekt, das das File referenziert und ein Commit, das auf den Tree zeigt. 
+
+
+## Commits
+
+  * Commits sind das "gröbste" Artefakt in Git
+  * Branches sind nur Referenzen auf Commits (idR der HEAD des Branches)
+  * Ein Commit hat 1..n Parents, diese haben wiederum Parents...
+    * Aus den Daten eines Commits kann man die ganze History ableiten
+    * Ein Commit mit mehreren Eltern ist ein Merge-Commit
+    * Ein Commit mit mehreren Kindern ist das Eltern von einem neuen Branch
+
+## Speicherung (Schaubild)
+  
+  * Git trackt Dateien/Trees/Commits über das gesamte Repo
+  * Solange ein Hash für ein Objekt das gleiche ist, wird es nicht doppelt gespeichert
+  * Das gilt für quasi alles, also Commits, Trees, Blobs
+  * Und das gilt über Branches, Tags etc. hinweg!
+  * Deshalb sind diese Operationen auch so "günstig" in Git
+
+## Commits 
+
+  * Tags sind also das gleiche wie Branches, nur haben sie noch ne zusätzliche Beschreibung
+  * Alle Aktionen in GIT, die mit Namen (für Branches, Tags) ausgeführt werden, können auch mit Hashes ausgeführt werden
+
+  * Schaubild History mit Branch und Tag
+
+## Demo
 
 ~~~
 $ mkdir sample; cd sample
@@ -70,9 +113,6 @@ blob
 $ git cat-file blob af5626b
 Hello, world!
 ~~~
-
-## Bäume
-
 ~~~
 $ git ls-tree HEAD
 100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
@@ -85,14 +125,11 @@ $ git cat-file -t 2c87275b325b704a6978f3ed1d16c6ab4912064e
 commit
 
 $ git cat-file commit HEAD
-...
+  # Commit Informationt
 
 $ git ls-tree 2c87275b325b704a6978f3ed1d16c6ab4912064e
 100644 blob af5626b4a114abcb82d63db7c8082c3c4756e51b greeting
 ~~~
-
-Im Repo also - ein Blob (das File), ein Tree Objekt, das das File referenziert und ein Commit, das auf den Tree zeigt. 
-
 ~~~
 $ find .git/objects/ -type f | sort
 .git/objects/05/63f77d884e4f79ce95117e2d686d7d6e282887
@@ -109,33 +146,11 @@ tree
 ...
 ~~~
 
-## Commits
-
-  * Commits sind das "gröbste" Artefakt in Git
-  * Branches sind nur Referenzen auf Commits (idR der HEAD des Branches)
-  * Ein Commit hat 1..n Parents, diese haben wiederum Parents...
-    * Aus den Daten eines Commits kann man die ganze History ableiten
-    * Ein Commit mit mehreren Eltern ist ein Merge-Commit
-    * Ein Commit mit mehreren Kindern ist das Eltern von einem neuen Branch
-
 ~~~
 $ git branch -v
   master      8dc350a SW-5671 - Add parellel lint processing
 * shop-ekz-de ac9e8af Konfiguration der OxaionDB jetzt per PDO
 ~~~
-
-  * Tags sind also das gleiche wie Branches, nur haben sie noch ne zusätzliche Beschreibung
-  * Alle Aktionen in GIT, die mit Namen (für Branches, Tags) ausgeführt werden, können auch mit Hashes ausgeführt werden
-
-  * `git log HEAD^..HEAD`
-
-## Speicherung
-  
-  * Git trackt Dateien/Trees/Commits über das gesamte Repo
-  * Solange ein Hash für ein Objekt das gleiche ist, wird es nicht doppelt gespeichert
-  * Das gilt für quasi alles, also Commits, Trees, Blobs
-  * Und das gilt über Branches, Tags etc. hinweg!
-  * Deshalb sind diese Operationen auch so "günstig" in Git
 
 ## Branching, Merging und Rebase
 
