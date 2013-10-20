@@ -36,14 +36,26 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section data-background-image="img/gitlogo.jpg"
-                         data-background-size="900px">
-					<!-- <h1>Advanced Git</h1>
-					<h3>Git Interna &amp; Best Practices</h3>
-					<p>
-						<small><a href="http://kahlil.co">Kahlil Lechelt</a> &amp; <a href="http://zamora.de">Manuel Zamora</a></small>
-					</p> -->
-				</section>
+
+                
+                <section>
+                    <section data-background-image="img/gitlogo.jpg"
+                             data-background-size="900px">
+                        <!-- <h1>Advanced Git</h1>
+                        <h3>Git Interna &amp; Best Practices</h3>
+                        <p>
+                            <small><a href="http://kahlil.co">Kahlil Lechelt</a> &amp; <a href="http://zamora.de">Manuel Zamora</a></small>
+                        </p> -->
+                    </section>
+                    <section>
+                        <h2>Agenda</h2>
+                        <p>Einleitung</p>
+                        <p>Grundlagen</p>
+                        <p>Best Practices</p>
+                        <p>Fragen/Diskussion</p>
+                    </section>
+                </section>
+
 
                 <!-- Git Fundamentals -->
                 <section>
@@ -138,6 +150,194 @@
                 <section>
                     <section>
                         <h2>Branching, Merging & Rebasing</h2>
+                    </section>
+
+                    <section>
+                        <p>Branchen ist günstig</p>
+                        <p>Branch early, Branch often</p>
+                        <p>Zusammenführen: Merging & Rebasing</p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                    </section>
+
+                    <section>
+                        <h3>Merging</h3>
+                        <p>Änderungen von Dev in Master verfügbar machen</p>
+                        <p><code class="bash">
+                            git checkout master; git merge dev
+                        </code></p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                        <img src="img/branches-merge.png" width="800px;" />
+
+                    </section>
+
+                    <section>
+                        <h3>Merging</h3>
+                        <p>Ausnahme: Fast Forward Merge</p>
+                        <img src="img/branches-merge-ff.png" width="585px;" />
+                        <img src="img/branches-merge-ff-final.png" width="585px;" />
+                    </section>
+
+                    <section>
+                        <h3>Rebasing</h3>
+                        <p>Rebasing: Verändern des Base-Commits eines Branches</p>
+                        <p><code>git checkout dev; git rebase master</code><p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                        <img src="img/branches-rebase.png" width="1000px;" />
+                    </section>
+
+                    <section>
+                        <h3>Rebasing</h3>
+                        <img src="img/branches-rebase-onto-1.png" width="700px" />
+                        <p>TODO: Feature soll aus Dev gebrancht sein</p>
+                    </section>
+                    <section>
+                        <h3>Rebasing</h3>
+                        <p>TODO: Feature soll aus Dev gebrancht sein</p>
+                        <p class="fragment"><code>git rebase --onto dev master feature</code></p>
+                        <img class="fragment" src="img/branches-rebase-onto-2.png" width="900px" />
+                    </section>
+                    <section>
+                        <h3>Interaktives Rebase</h3>
+                        <p>Pick</p>
+                        <p>Squash</p>
+                        <p>Edit</p>
+                        <p>Drop</p>
+                    </section>
+                    <section>
+                        <h3>Rebase On Pull</h3>
+                        <p>Lineare Entwicklungshistory<p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Reset vs Checkout</h2>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Branches, Tags</p>
+                        <p>Auschecken von einzelnen Files aus der History</p>
+                        <p>Überschreiben von lokalen Änderungen mit <code>--force</code></p>
+                        <p>Setzt HEAD um</p>
+                        <pre>
+                        <code>
+git checkout master
+git checkout v1.0
+git checkout c10b9
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Kopieren von Files aus der History in das Working Directory</p>
+                        <p><code>git checkout c10b9 files</code></p>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Commit ohne Referenz: Detached Mode</p>
+                        <p>Trotzdem erzeugen von Commits möglich</p>
+                        <p>Diese sind in der History nicht sichtbar</p>
+                        <p>Nachträgliches Erstellen von Branch</p>
+                        <p>... oder cherry pick, rebasen, merging...</p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Unstagen von Änderungen:</p><p><code>git add file; git reset file</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Verschiebt HEAD von Branch auf andere Position</p>
+                        <br />
+                        <p>Ohne Wegwerfen von Änderungen: <code>--soft</code> </p>
+                        <p>Übersprungene Commits als Änderungen angezeigt</p>
+                        <br />
+                        <p>Mit Wegwerfen von Änderungen: <code>--hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Wegwerfen lokaler Änderungen / Leeren der Stage:</p>
+                        <p><code>git reset --hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Clean</h3>
+                        <p><code>git clean</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>History vs Reflog</h2>
+                    </section>
+                    <section>
+                        <h3>History</h3>
+                        <p>Zeigt alle durch Referenzen erreichbare Commits + deren History</p>
+                        <p><code>git log</code></p>
+                    </section>
+                    <section>
+                        <h3>Reflog</h3>
+                        <p>Zeigt <b>alle</b> Commits</p>
+                        <br />
+                        <p><code>git reflog</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Stashing</h2></section>
+                    <section>
+                        <h3>Stashing</h3>
+                        <p>Wegpacken von lokalen Änderungen</p>
+                        <p>Erzeugt unsichtbaren Spezialcommit</p>
+                        <p>Nutzbar z.B. als lokale History</p>
+                        <br />
+                        <p><code>git stash save -u "message"</code></p>
+                        <p><code>git stash list</code></p>
+                        <p><code>git stash apply stash@{1}</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Submodules</h2></section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Einbinden von anderen Repositories</p>
+                        <p>z.B. Vendor-Libs, Plugins, ...</p>
+                    </section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Referenziert gezielt einen Commit aus Repo an URL</p>
+                        <p>Super-Repo enthält eigenen Code + referenziert Subrepos an bestimmten Stand</p>
+                        <br />
+                        <h4>Versionierung von Releases</h4>
+                        <p>Mithilfe Submodules: Version 1.0 von Plugin A,<br />Version 2.1 von Modul B</p>
+                        <p>Hauptrepository taggen</p>
+                        <p>Dann möglich: <code>git checkout release-v1.1</code></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section><h2>Wie kann man das alles einsetzen?</h2></section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p>Verwendung von PHP-Shop Shopware</p>
+                        <p>Eigene Plugins für legacy Datenbank-Anbindung</p>
+                        <p>Eigenes Theme</p>
+                        <p>...</p>
+                        <br />
+                        <p class="fragment">Shopware in öffentlichem Github-Repository</p>
+                    </section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p class="fragment">Klonen des Shopware-Repos</p>
+                        <p class="fragment">Auschecken von Versionierungs-Tag</p>
+                        <p class="fragment">Erstellen von eigenem Projekt-Branch: shop-ekz-de</p>
+                        <p class="fragment">Einbinden der eigenen Module, Templates per Submodule</p>
+                        <p class="fragment">Zum Release: Festhalten der SW-Version + Stand Submodules</p>
+                    </section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p>Bonus: Einfache Upgrades</p>
+                        <p class="fragment">Umsetzen des Projekt-Branches per Rebase:</p>
+                        <p class="fragment"><code>git rebase --onto 4.1.3 4.1.0 shop-ekz-de</code></p>
                     </section>
                 </section>
 

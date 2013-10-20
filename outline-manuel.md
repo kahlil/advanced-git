@@ -164,6 +164,9 @@ git merge dev
     - W - X - Y - Z - Z' (master)
 ~~~
 
+  * Ggf. Konflikte
+  * Mehrere Merge-Algorithmen
+
 ### Rebasen
 
   * Rebasen: Verändern des "Base-Commits" eines Branches
@@ -185,18 +188,10 @@ git rebase master
   
   * Nicht nur Zusammenführen, sondern auch "Umpflanzen" möglich
 
-~~~
-     A - B - C - D  (dev)
-   /
-  0 - W - X - Y - Z (master)
-          |
-          1 - 2 - 3 (dev2)
-~~~
-
-  * Dev2 soll jetzt von Dev aus gebranched sein
+  * Feature soll aus Dev gebrancht sein
 
 ~~~
-git rebase --onto dev master dev # --onto new-branch oldbranch current-branchname
+git rebase --onto dev master feature # --onto new-branch oldbranch current-branchname
 ~~~
 
 ~~~
@@ -212,6 +207,8 @@ git rebase --onto dev master dev # --onto new-branch oldbranch current-branchnam
     * Squash: Zusammenführen von mehreren Commits zu einem
     * Edit: Verändern von Commits
     * Drop: Rauswerfen eines Commits
+
+  * Rebase on Pull: Lineare Entwicklungshistory, keine Merge nötig beim Pullen
 
 ## Reset vs Checkout
 
@@ -232,9 +229,10 @@ git checkout v1.0
 git checkout c10b9
 ~~~
 
-  * Checken wir ein Commit aus, das keine Referenz hat, so müssen wir aufpassen - dieser Fall wird dangling Head genannt (TODO: Bild)
+  * Checken wir ein Commit aus, das keine Referenz hat, so müssen wir aufpassen - dieser Fall wird detached Mode genannt
   * Wir können commiten, aber da keine Referenz auf diesen Commit zeigt, "kennt" das niemand
-  * Checken wir jetzt wieder master aus, so ist dieser Commit "weg"
+  * Möglichkeit zu Experimenten etc.
+  * Checken wir jetzt wieder master aus, so ist dieser Commit "weg" (nirgendwo referenziert)
   * Im Reflog ist dieser Commit vorhanden und kann wieder ausgecheckt werden
   * Oder in den Branch gemerged/rebased/gecherry-picked werden
   * Oder nachträglich zu einem Branch gemacht werden
@@ -258,6 +256,25 @@ git checkout c10b9
 
   * Zum Aufräumen im Working-Directory: Nicht ausgecheckte Dateien, Build-Artefakte (ignorierte Dateien) wegwerfen: `git clean`
 
+## History vs Reflog
+
+## History
+
+  * Zeigt alle Commits, die referenziert sind
+
+## Reflog
+
+  * Zusätzlich zur normalen History gibt es noch das Reflog
+  * Hier werden alle Commits aufgeführt, auch solche, die nicht durch Referenzen aufgefunden werden können
+    * Dangling Heads, Anonyme Branches
+    * Stashes
+  * Nach 30 Tagen (default) werden alle Dangling Heads etc. durch die Garbage Collection von Git gelöscht
+
+~~~
+git reflog
+~~~
+  * Konsole: Auf Konsole unterschied zeigen zwischen History mit Branches und Reflog
+
 ## Stashing
 
   * Änderungen an dem Working-Tree gegenüber von HEAD können als Spezial-Commit abgelegt werden
@@ -276,19 +293,6 @@ git stash apply stash@{1}
 git stash pop
 ~~~
 
-## Reflog
-
-  * Zusätzlich zur normalen History gibt es noch das Reflog
-  * Hier werden alle Commits aufgeführt, auch solche, die nicht durch Referenzen aufgefunden werden können
-    * Dangling Heads, Anonyme Branches
-    * Stashes
-  * Nach 30 Tagen (default) werden alle Dangling Heads etc. durch die Garbage Collection von Git gelöscht
-
-~~~
-git reflog
-~~~
-  * Konsole: Auf Konsole unterschied zeigen zwischen History mit Branches und Reflog
-
 ## Submodules
 
   * Mit Submodules kann man andere Repositories in sein Repository integrieren
@@ -298,11 +302,6 @@ git reflog
     * Version 1.0 von Plugin A, Version 2.1 von Modul B sowie alle Änderung bis hierher
     * Tag Setzen
     * Release ist definiert
-
-  * Auf Konsole zeigen: 
-    * Zwei Repos anlegen, ein Repo als Subrepo vom zweiten;
-    * Sub-Repo Commit eintragen: git status, "has new commits"
-    * Stand festsetzen: Commit im Hauptrepo
 
 ### Anwendungsbeispiel: Shopware / Kunde EKZ
 
