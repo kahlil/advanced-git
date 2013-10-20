@@ -18,12 +18,14 @@
 // @import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
 // @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,800,600,300);
+
 
 // Override theme settings (see ../template/settings.scss)
-$mainFont: 'Helvetica Neue', sans-serif;
-$mainColor: #333;
-$headingFont: 'Helvetica Neue', sans-serif;
-$headingColor: #333;
+$mainFont: 'Open Sans', 'Helvetica Neue', sans-serif;
+$mainColor: #312b11;
+$headingFont: 'Open Sans', 'Helvetica Neue', sans-serif;
+$headingColor: #c24d3b;
 $headingTextShadow: none;
 $headingTextTransform: none;
 $backgroundColor: #fff;
@@ -45,8 +47,18 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 	h1, h2, h3, h4, h5, h6 {
 		margin: 0 0 35px 0;
 		line-height: 1.2em;
+		font-weight: 300;
 	}
 	p {
 		margin-bottom: 20px;
+	}
+
+	section[data-background-image] {
+		// background: rgba(255,255,255, .8);
+		// border-radius: 8px;
+	}
+
+	.slides section .fragment.highlight-red.visible {
+		color: #c24d3b;
 	}
 }

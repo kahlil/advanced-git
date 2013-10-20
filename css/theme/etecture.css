@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,700,800,600,300);
 /**
  * A simple theme for reveal.js presentations, similar
  * to the default theme. The accent color is darkblue.
@@ -13,11 +14,11 @@ body {
   background-color: white; }
 
 .reveal {
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 36px;
   font-weight: 200;
   letter-spacing: -0.02em;
-  color: #333333; }
+  color: #312b11; }
 
 ::selection {
   color: white;
@@ -34,8 +35,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #333333;
-  font-family: "Helvetica Neue", sans-serif;
+  color: #c24d3b;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 0.9em;
   letter-spacing: 0.02em;
   text-transform: none;
@@ -71,7 +72,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #333333;
+  border: 4px solid #312b11;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   -webkit-transition: all .2s linear;
   -moz-transition: all .2s linear;
@@ -135,6 +136,9 @@ body {
   box-shadow: none; }
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
   margin: 0 0 35px 0;
-  line-height: 1.2em; }
+  line-height: 1.2em;
+  font-weight: 300; }
 .reveal p {
   margin-bottom: 20px; }
+.reveal .slides section .fragment.highlight-red.visible {
+  color: #c24d3b; }
