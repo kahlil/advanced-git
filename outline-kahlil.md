@@ -16,13 +16,13 @@ Mit dieser Option kann man einstellen ob geänderte Dateiberechtigungen beim ein
 Git passt beim auschecken die Zeilenenden dem System an und checkt alle Dateien mit LF ein.
 Best Practice ist in der Regel eine .gitattributes Datei im Root des Projektes abzulegen und dort das gewünschte Verhalten zu konfigurieren.
 
-text=auto
+* text=auto
 
 sichert das automatisch umschreiben der Zeielenenden.
 
 Wenn man auf Windows das Umschreiben der Zeilenenden von LF auf CRLF vermeiden will schreibt man
 
-text eol=lf
+* text eol=lf
 
 in die .gitattributes Datei. Diese wird dann mit eingecheckt.
 

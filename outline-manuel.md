@@ -5,7 +5,7 @@
 # Agenda
 
   * Agenda
-  * Wer hat noch keine Erfahrung mit Git? 
+  * Wer hat noch keine Erfahrung mit Git?
 
 # Prinzipien (10min)
 
@@ -38,7 +38,7 @@
 ## Grundlagen (20min bis einschl. Demo)
 
 ## Plumbing vs Porcelain Features => Unix Prinzip
-  
+
   * Plumbing = Verdrahtung
   * Porcelain = Porzelan
   * Porzelan nutzt Verdrahtung, aber Verdraht nicht versteckt sondern zugänglich
@@ -46,10 +46,10 @@
 ## Begriffe
 
   * Repository: Sammlung von Commits. Hat eine HEAD-Referenz auf den aktuellen Commit, der im Working Tree vorliegt (ggf. verändert). Sammlung von Branches und Tags, die Commits idenitifieren.
-  * Commit: Zustand des Working Trees zu einem gewissen Zustand. 
+  * Commit: Zustand des Working Trees zu einem gewissen Zustand.
   * Working Tree: Das Arbeitsverzeichnis, in dem ein Git-Repo vorhanden ist
   * HEAD: Zeigt auf den aktuellen Commit (bzw. Branch) der ausgecheckt ist, unabhängig, ob dieser bereits verändert wurde. Aber auch der aktuellste Commit eines Branches wird so genannt.
-  * Staging Area / Index: Veränderungen im Working Tree werden zuerst im Index registriert, bevor sie commited werden. 
+  * Staging Area / Index: Veränderungen im Working Tree werden zuerst im Index registriert, bevor sie commited werden.
   * Master: Der "Standard"-Branch, der immer vorhanden ist und je nach Konvention in verschiedener Weise genutzt wird.
   * Branch: Zeigt immer auf den aktuellsten Commit eines Entwicklungszweiges (+ Name)
   * Tag: Zeigt immer auf den gleichen Commit innerhalb des Repositories (+ Name, Beschreibung)
@@ -73,7 +73,7 @@
 ## Bäume
 
 
-Im Repo also - ein Blob (das File), ein Tree Objekt, das das File referenziert und ein Commit, das auf den Tree zeigt. 
+Im Repo also - ein Blob (das File), ein Tree Objekt, das das File referenziert und ein Commit, das auf den Tree zeigt.
 
 
 ## Commits
@@ -86,14 +86,14 @@ Im Repo also - ein Blob (das File), ein Tree Objekt, das das File referenziert u
     * Ein Commit mit mehreren Kindern ist das Eltern von einem neuen Branch
 
 ## Speicherung (Schaubild)
-  
+
   * Git trackt Dateien/Trees/Commits über das gesamte Repo
   * Solange ein Hash für ein Objekt das gleiche ist, wird es nicht doppelt gespeichert
   * Das gilt für quasi alles, also Commits, Trees, Blobs
   * Und das gilt über Branches, Tags etc. hinweg!
   * Deshalb sind diese Operationen auch so "günstig" in Git
 
-## Commits 
+## Commits
 
   * Tags sind also das gleiche wie Branches, nur haben sie noch ne zusätzliche Beschreibung
   * Alle Aktionen in GIT, die mit Namen (für Branches, Tags) ausgeführt werden, können auch mit Hashes ausgeführt werden
@@ -179,7 +179,7 @@ git merge dev
 
 ~~~
   0 - A - B - C - D-\  (dev)
-   \                 \ 
+   \                 \
     - W - X - Y - Z - Z' (master)
 ~~~
 
@@ -196,7 +196,7 @@ git rebase master
 ~~~
 
    * wird zu:
-   
+
 ~~~
 0 - W - X - Y - Z - A - B - C - D (master)
 ~~~
@@ -204,7 +204,7 @@ git rebase master
   * Dabei verändert Rebase (offensichtlich) die History des Repositories
     * Mehr dazu in den Best Practises
   * Aber: Schönere (einfachere) History
-  
+
   * Nicht nur Zusammenführen, sondern auch "Umpflanzen" möglich
 
   * Feature soll aus Dev gebrancht sein
@@ -243,7 +243,7 @@ git rebase --onto dev master feature # --onto new-branch oldbranch current-branc
 
 ### Checkout
 
-  * Checkout: Kopieren von Files aus der History oder dem Stage in das Working Directory 
+  * Checkout: Kopieren von Files aus der History oder dem Stage in das Working Directory
     * Mit --force Überschreiben von lokalen Änderungen an bereits eingecheckten Files
 
 ~~~
