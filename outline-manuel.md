@@ -237,7 +237,7 @@ git rebase --onto dev master feature # --onto new-branch oldbranch current-branc
   * Versionsupgrade von Shopware? Rebase mit --onto, Umsetzen des eigenen Branches von einer Version zur nächsten
 
 
-***Ab hier Bonusmaterial***
+# Ab hier Bonusmaterial
 
 ## Reset vs Checkout
 
