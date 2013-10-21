@@ -7,7 +7,7 @@
   * Agenda
   * Wer hat noch keine Erfahrung mit Git? 
 
-# Prinzipien
+# Prinzipien (10min)
 
   * Dezentral: Gesamtes Repo lokal verfügbar, Effizientes Checkout, Branching, Logs, ...
   * Nicht-lineare Entwicklung: Branchen sehr einfach und effizient
@@ -35,9 +35,13 @@
     * Rename, Move etc. wird aus Diff der Commits extrapoliert
     * Repo-Dateisystem seit Version 1.0 (Dezember 2005) unverändert
 
-## Grundlagen
+## Grundlagen (20min bis einschl. Demo)
 
 ## Plumbing vs Porcelain Features => Unix Prinzip
+  
+  * Plumbing = Verdrahtung
+  * Porcelain = Porzelan
+  * Porzelan nutzt Verdrahtung, aber Verdraht nicht versteckt sondern zugänglich
 
 ## Begriffe
 
@@ -152,7 +156,7 @@ $ git branch -v
 * shop-ekz-de ac9e8af Konfiguration der OxaionDB jetzt per PDO
 ~~~
 
-## Branching, Merging und Rebase
+## Branching, Merging und Rebase (10min)
 
   * Da Branches (im Gegensatz zu SVN) einfach nur eine Referenz auf ein Commit sind, ist es natürlich deutlich einfacher, solche zu erstellen und zu verwenden
   * Zum "Zusammenführen" von Branches gibt es zwei Möglichkeiten: Mergen und Rebasen
@@ -224,6 +228,16 @@ git rebase --onto dev master feature # --onto new-branch oldbranch current-branc
     * Drop: Rauswerfen eines Commits
 
   * Rebase on Pull: Lineare Entwicklungshistory, keine Merge nötig beim Pullen
+
+### Anwendungsbeispiel: Shopware / Kunde EKZ
+
+  * Branch von Tag von Shopware-Version
+  * Eigene Module, Templates als Submodul eingebunden
+  * Release-Tags definieren Stand von Shopware, Module, Template
+  * Versionsupgrade von Shopware? Rebase mit --onto, Umsetzen des eigenen Branches von einer Version zur nächsten
+
+
+***Ab hier Bonusmaterial***
 
 ## Reset vs Checkout
 
@@ -317,11 +331,4 @@ git stash pop
     * Version 1.0 von Plugin A, Version 2.1 von Modul B sowie alle Änderung bis hierher
     * Tag Setzen
     * Release ist definiert
-
-### Anwendungsbeispiel: Shopware / Kunde EKZ
-
-  * Branch von Tag von Shopware-Version
-  * Eigene Module, Templates als Submodul eingebunden
-  * Release-Tags definieren Stand von Shopware, Module, Template
-  * Versionsupgrade von Shopware? Rebase mit --onto, Umsetzen des eigenen Branches von einer Version zur nächsten
 

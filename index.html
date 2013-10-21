@@ -223,110 +223,6 @@ $ git branch -v
                         <h3>Rebase On Pull</h3>
                         <p>Lineare Entwicklungshistory<p>
                     </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h2>Reset vs Checkout</h2>
-                    </section>
-                    <section>
-                        <h3>Checkout</h3>
-                        <p>Auschecken von Branches, Tags</p>
-                        <p>Überschreiben von lokalen Änderungen mit <code>--force</code></p>
-                        <p>Setzt HEAD um</p>
-                        <pre>
-                        <code>
-git checkout master
-git checkout v1.0
-git checkout c10b9
-                        </code>
-                        </pre>
-                    </section>
-                    <section>
-                        <h3>Checkout</h3>
-                        <p>Kopieren von Files aus der History in das Working Directory</p>
-                        <p><code>git checkout c10b9 files</code></p>
-                    </section>
-                    <section>
-                        <h3>Checkout</h3>
-                        <p>Auschecken von Commit ohne Referenz: Detached Mode</p>
-                        <p>Trotzdem erzeugen von Commits möglich</p>
-                        <p>Diese sind in der History nicht sichtbar</p>
-                        <p>Nachträgliches Erstellen von Branch</p>
-                        <p>... oder cherry pick, rebasen, merging...</p>
-                    </section>
-                    <section>
-                        <h3>Reset</h3>
-                        <p>Unstagen von Änderungen:</p><p><code>git add file; git reset file</code></p>
-                    </section>
-                    <section>
-                        <h3>Reset</h3>
-                        <p>Verschiebt HEAD von Branch auf andere Position</p>
-                        <br />
-                        <p>Ohne Wegwerfen von Änderungen: <code>--soft</code> </p>
-                        <p>Übersprungene Commits als Änderungen angezeigt</p>
-                        <br />
-                        <p>Mit Wegwerfen von Änderungen: <code>--hard</code></p>
-                    </section>
-                    <section>
-                        <h3>Reset</h3>
-                        <p>Wegwerfen lokaler Änderungen / Leeren der Stage:</p>
-                        <p><code>git reset --hard</code></p>
-                    </section>
-                    <section>
-                        <h3>Clean</h3>
-                        <p><code>git clean</code></p>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <h2>History vs Reflog</h2>
-                    </section>
-                    <section>
-                        <h3>History</h3>
-                        <p>Zeigt alle durch Referenzen erreichbare Commits + deren History</p>
-                        <p><code>git log</code></p>
-                    </section>
-                    <section>
-                        <h3>Reflog</h3>
-                        <p>Zeigt <b>alle</b> Commits</p>
-                        <br />
-                        <p><code>git reflog</code></p>
-                    </section>
-                </section>
-                <section>
-                    <section><h2>Stashing</h2></section>
-                    <section>
-                        <h3>Stashing</h3>
-                        <p>Wegpacken von lokalen Änderungen</p>
-                        <p>Erzeugt unsichtbaren Spezialcommit</p>
-                        <p>Nutzbar z.B. als lokale History</p>
-                        <br />
-                        <p><code>git stash save -u "message"</code></p>
-                        <p><code>git stash list</code></p>
-                        <p><code>git stash apply stash@{1}</code></p>
-                    </section>
-                </section>
-                <section>
-                    <section><h2>Submodules</h2></section>
-                    <section>
-                        <h3>Submodules</h3>
-                        <p>Einbinden von anderen Repositories</p>
-                        <p>z.B. Vendor-Libs, Plugins, ...</p>
-                    </section>
-                    <section>
-                        <h3>Submodules</h3>
-                        <p>Referenziert gezielt einen Commit aus Repo an URL</p>
-                        <p>Super-Repo enthält eigenen Code + referenziert Subrepos an bestimmten Stand</p>
-                        <br />
-                        <h4>Versionierung von Releases</h4>
-                        <p>Mithilfe Submodules: Version 1.0 von Plugin A,<br />Version 2.1 von Modul B</p>
-                        <p>Hauptrepository taggen</p>
-                        <p>Dann möglich: <code>git checkout release-v1.1</code></p>
-                    </section>
-                </section>
-
-                <section>
                     <section><h2>Wie kann man das alles einsetzen?</h2></section>
                     <section>
                         <h3>shopping.ekz.de</h3>
@@ -352,6 +248,7 @@ git checkout c10b9
                         <p class="fragment"><code>git rebase --onto 4.1.3 4.1.0 shop-ekz-de</code></p>
                     </section>
                 </section>
+
 
 				<!-- Anfang: Best Practices -->
 
@@ -702,6 +599,112 @@ Further paragraphs come after blank lines.
                 </section>
 
 				<!-- Ende: Best Practices -->
+
+                <section>
+                    <h1>Bonus</h1>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Reset vs Checkout</h2>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Branches, Tags</p>
+                        <p>Überschreiben von lokalen Änderungen mit <code>--force</code></p>
+                        <p>Setzt HEAD um</p>
+                        <pre>
+                        <code>
+git checkout master
+git checkout v1.0
+git checkout c10b9
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Kopieren von Files aus der History in das Working Directory</p>
+                        <p><code>git checkout c10b9 files</code></p>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Commit ohne Referenz: Detached Mode</p>
+                        <p>Trotzdem erzeugen von Commits möglich</p>
+                        <p>Diese sind in der History nicht sichtbar</p>
+                        <p>Nachträgliches Erstellen von Branch</p>
+                        <p>... oder cherry pick, rebasen, merging...</p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Unstagen von Änderungen:</p><p><code>git add file; git reset file</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Verschiebt HEAD von Branch auf andere Position</p>
+                        <br />
+                        <p>Ohne Wegwerfen von Änderungen: <code>--soft</code> </p>
+                        <p>Übersprungene Commits als Änderungen angezeigt</p>
+                        <br />
+                        <p>Mit Wegwerfen von Änderungen: <code>--hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Wegwerfen lokaler Änderungen / Leeren der Stage:</p>
+                        <p><code>git reset --hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Clean</h3>
+                        <p><code>git clean</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>History vs Reflog</h2>
+                    </section>
+                    <section>
+                        <h3>History</h3>
+                        <p>Zeigt alle durch Referenzen erreichbare Commits + deren History</p>
+                        <p><code>git log</code></p>
+                    </section>
+                    <section>
+                        <h3>Reflog</h3>
+                        <p>Zeigt <b>alle</b> Commits</p>
+                        <br />
+                        <p><code>git reflog</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Stashing</h2></section>
+                    <section>
+                        <h3>Stashing</h3>
+                        <p>Wegpacken von lokalen Änderungen</p>
+                        <p>Erzeugt unsichtbaren Spezialcommit</p>
+                        <p>Nutzbar z.B. als lokale History</p>
+                        <br />
+                        <p><code>git stash save -u "message"</code></p>
+                        <p><code>git stash list</code></p>
+                        <p><code>git stash apply stash@{1}</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Submodules</h2></section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Einbinden von anderen Repositories</p>
+                        <p>z.B. Vendor-Libs, Plugins, ...</p>
+                    </section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Referenziert gezielt einen Commit aus Repo an URL</p>
+                        <p>Super-Repo enthält eigenen Code + referenziert Subrepos an bestimmten Stand</p>
+                        <br />
+                        <h4>Versionierung von Releases</h4>
+                        <p>Mithilfe Submodules: Version 1.0 von Plugin A,<br />Version 2.1 von Modul B</p>
+                        <p>Hauptrepository taggen</p>
+                        <p>Dann möglich: <code>git checkout release-v1.1</code></p>
+                    </section>
+                </section>
+
 			</div>
 
 		</div>
