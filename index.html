@@ -1,52 +1,742 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 	<head>
-
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<title>reveal.js - The HTML Presentations Framework</title>
 
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/main.css">
+		<title>Advanced Git - Manuel Zamora &amp; Kahlil Lechelt</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/etecture.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
 
 		<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
-
 	</head>
+
 	<body>
-		<div class="wrapper">
 
-			<header>
+		<div class="reveal">
 
-				<h1>reveal.js</h1>
-				<p>
-					The HTML Presentation Framework &mdash; Site coming soon
-				</p>
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
 
-			</header>
 
-			<footer>
+                <section>
+                    <section data-background-image="img/gitlogo.jpg"
+                             data-background-size="900px">
+                        <!-- <h1>Advanced Git</h1>
+                        <h3>Git Interna &amp; Best Practices</h3>
+                        <p>
+                            <small><a href="http://kahlil.co">Kahlil Lechelt</a> &amp; <a href="http://zamora.de">Manuel Zamora</a></small>
+                        </p> -->
+                    </section>
+                    <section>
+                        <h2>Agenda</h2>
+                        <p>Einleitung</p>
+                        <p>Grundlagen</p>
+                        <p>Best Practices</p>
+                        <p>Fragen/Diskussion</p>
+                    </section>
+                </section>
 
-				<p>
-					<a href="http://lab.hakim.se/reveal-js">Try the demo</a>
-					<a href="https://github.com/hakimel/reveal.js/releases">Download</a>
-				</p>
 
-			</footer>
+                <!-- Git Fundamentals -->
+                <section>
+                    <section>
+                        <h1>Einleitung</h1>
+                    </section>
+                    <section>
+                        <h2>Prinzipien</h2>
+
+                        <p class="fragment">Dezentral</p>
+                        <p class="fragment">Nicht-lineare Entwicklung</p>
+                        <p class="fragment">Sicher</p>
+                        <p class="fragment">Effizient</p>
+                    </section>
+
+                    <section>
+                        <h3>SVN</h3>
+                        <p>File basiert, Delta-Storage</p>
+                        <!--<p>Copy, Move, Rename als eigene Operation im Commit</p>-->
+                    </section>
+
+                    <section>
+                        <h3>Git</h3>
+                        <p>Hash basiert, Snapshot-Speicherung</p>
+                        <!--<p>Copy, Move, Rename, Diffs werden aus History extrapoliert</p>-->
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Grundlagen</h1>
+                    </section>
+                    <section>
+                        <h3>Plumbing vs Porcelain</h3>
+                    </section>
+                    <section>
+                        <h3>Begriffe</h3>
+                        <p class="fragment">Repository</p>
+                        <p class="fragment">Commit</p>
+                        <p class="fragment">Working Tree</p>
+                        <p class="fragment">HEAD</p>
+                        <p class="fragment">Staging Area / Index</p>
+                        <p class="fragment">master</p>
+                        <p class="fragment">Branch</p>
+                        <p class="fragment">Tag</p>
+                    </section>
+                    <section data-background="img/repo-workingtree-stagingarea.png" data-background-size="75%">
+                    </section>
+                    <section>
+                        <h3>Repository</h3>
+                    </section>
+                    <section data-background="img/commits-trees-blobs.png" data-background-size="70%">
+                    </section>
+                    <section>
+                        <h3>Blob</h3>
+                        <p>ID = SHA ( Dateiinhalt + Dateigröße )</p>
+                        <br />
+                        <p>Jede Datei wird nur einmal gespeichert</p>
+                        <p>Blobs sind unveränderlich</p>
+                    </section>
+                    <section>
+                        <h3>Tree</h3>
+                        <p>ID = SHA ( Blob-Hashes + Tree-Hashes )</p>
+                        <br />
+                        <p>Verzeichniszuordnung</p>
+                        <p>Berechtigungen</p>
+                        <p>Dateiname</p>
+                        <p>Verweis auf untergeordnete Trees</p>
+                        <br />
+                        <p>Trees sind unveränderlich</p>
+                    </section>
+                    <section>
+                        <h3>Commit</h3>
+                        <p>ID = SHA ( Autor + Datum + Trees + Blobs )</p>
+                        <br />
+                        <p>Commits referenzieren 1..n Eltern-Commits</p>
+                        <p>Ein Commit mit mehreren Eltern: Merge-Commit</p>
+                        <p>Ein Commit mit mehreren Kindern: Branch-Knoten</p>
+                        <br />
+                        <p>Alle Commits = History</p>
+                        <br />
+                        <p>Commits sind unveränderlich</p>
+                    </section>
+                    <section data-background="img/two-commits.png" data-background-size="30%"></section>
+                    <section>
+                        <h3>Commit</h3>
+                        <p>Branches: Referenzen auf einen Commit</p>
+                        <p>Tags: Referenzen auf einen Commit</p>
+                        <br />
+                        <p>Referenz: Name für einen Hash</p>
+                        <pre><code>
+$ git branch -v
+  master      8dc350a SW-5671 - Add parellel lint processing
+* shop-ekz-de ac9e8af Konfiguration der OxaionDB jetzt per PDO
+~~~
+                        </code></pre>
+                    </section>
+                    <section data-background="img/history.png" data-background-size="30%"></section>
+                    <section>
+                        <h3>Demo</h3>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Branching, Merging & Rebasing</h2>
+                    </section>
+
+                    <section>
+                        <h3>Branches</h3>
+                        <p>Branchen ist günstig</p>
+                        <p>Branch early, Branch often</p>
+                        <p>Zusammenführen: Merging & Rebasing</p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                    </section>
+
+                    <section>
+                        <h3>Merging</h3>
+                        <p>Änderungen von Dev in Master verfügbar machen</p>
+                        <p><code class="bash">
+                            git checkout master; git merge dev
+                        </code></p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                        <img src="img/branches-merge.png" width="800px;" />
+
+                    </section>
+
+                    <section>
+                        <h3>Merging</h3>
+                        <p>Ausnahme: Fast Forward Merge</p>
+                        <img src="img/branches-merge-ff.png" width="585px;" />
+                        <img src="img/branches-merge-ff-final.png" width="585px;" />
+                    </section>
+
+                    <section>
+                        <h3>Rebasing</h3>
+                        <p>Rebasing: Verändern des Base-Commits eines Branches</p>
+                        <p><code>git checkout dev; git rebase master</code><p>
+                        <br />
+                        <img src="img/branches.png" width="800px;" />
+                        <img src="img/branches-rebase.png" width="1000px;" />
+                    </section>
+
+                    <section>
+                        <h3>Rebasing</h3>
+                        <img src="img/branches-rebase-onto-1.png" width="700px" />
+                        <p>TODO: Feature soll aus Dev gebrancht sein</p>
+                    </section>
+                    <section>
+                        <h3>Rebasing</h3>
+                        <p>TODO: Feature soll aus Dev gebrancht sein</p>
+                        <p class="fragment"><code>git rebase --onto dev master feature</code></p>
+                        <img class="fragment" src="img/branches-rebase-onto-2.png" width="900px" />
+                    </section>
+                    <section>
+                        <h3>Interaktives Rebase</h3>
+                        <p>Pick</p>
+                        <p>Squash</p>
+                        <p>Edit</p>
+                        <p>Drop</p>
+                    </section>
+                    <section>
+                        <h3>Rebase On Pull</h3>
+                        <p>Lineare Entwicklungshistory<p>
+                    </section>
+                    <section><h2>Wie kann man das alles einsetzen?</h2></section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p>Verwendung von PHP-Shop Shopware</p>
+                        <p>Eigene Plugins für legacy Datenbank-Anbindung</p>
+                        <p>Eigenes Theme</p>
+                        <p>...</p>
+                        <br />
+                        <p class="fragment">Shopware in öffentlichem Github-Repository</p>
+                    </section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p class="fragment">Klonen des Shopware-Repos</p>
+                        <p class="fragment">Auschecken von Versionierungs-Tag</p>
+                        <p class="fragment">Erstellen von eigenem Projekt-Branch: shop-ekz-de</p>
+                        <p class="fragment">Einbinden der eigenen Module, Templates per Submodule</p>
+                        <p class="fragment">Zum Release: Festhalten der SW-Version + Stand Submodules</p>
+                    </section>
+                    <section>
+                        <h3>shopping.ekz.de</h3>
+                        <p>Bonus: Einfache Upgrades</p>
+                        <p class="fragment">Umsetzen des Projekt-Branches per Rebase:</p>
+                        <p class="fragment"><code>git rebase --onto 4.1.3 4.1.0 shop-ekz-de</code></p>
+                    </section>
+                </section>
+
+
+				<!-- Anfang: Best Practices -->
+
+				<section>
+					<h1>Best Practices</h1>
+				</section>
+
+				<section>
+					<section>
+						<h2>Filemode</h2>
+
+
+						<aside class="notes">
+							Notes
+						</aside>
+					</section>
+
+					<section>
+						<code>git config core.filemode true|false</code>
+					</section>
+
+					<section>
+						<blockquote>
+                            If false, the executable bit differences
+                            between the index and the working copy
+                            are ignored; useful on broken filesystems
+                            like FAT. See git-update-index(1).
+                            True by default.
+						</blockquote>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h2>Zeilenendungen</h2>
+
+
+						<aside class="notes">
+							Notes
+						</aside>
+					</section>
+
+                    <section>
+                        <h3>CRLF vs. LF</h3>
+                    </section>
+
+                    <section>
+                        <h3>.gitattributes</h3>
+                    </section>
+
+                    <section>
+                        <code>text=auto</code>
+                    </section>
+
+                    <section>
+                        <code>text eol=lf</code>
+                    </section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Rebase</h2>
+
+                        <p class="fragment fade-in">Niemals veröffentlichte Commits rebasen.</p>
+                        <p class="fragment fade-in">
+                            <code>
+                                git config branch.autosetuprebase always
+                            </code>
+                        </p>
+						<aside class="notes">
+							Notes
+						</aside>
+					</section>
+				</section>
+
+                <section>
+                    <section>
+                        <h2>Branchen, Branchen, Branchen!</h2>
+
+                        <p class="fragment fade-in">
+                            Features, Bugs, Experimente.
+                        </p>
+                        <p class="fragment fade-in">
+                            Müssen nicht gepusht werden.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Stashen, Stashen, Stashen!</h2>
+                    </section>
+
+                    <section>
+                        <code>git stash save "Stashname oder. Beschreibung"</code>
+                    </section>
+
+                    <section data-background-image="img/stashes.png"
+                             data-background-size="800px"></section>
+
+                    <section>
+                        <code>git stash apply stash@{1}</code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>CLI bevor GUI!</h2>
+                    </section>
+
+                    <section>
+                        <h2>Bash Autocomplete</h2>
+                        <p class="fragment fade-in">Git Bash auf Windows</p>
+                    </section>
+                </section>
+
+				<section>
+					<section>
+						<h2>Commit Message</h2>
+						<pre>
+<strong class="fragment highlight-red">Capitalized, short (50 chars or less)</strong> summary
+
+More detailed explanatory text, if necessary.  <strong class="fragment highlight-red">Wrap it to about 72
+characters or so.</strong> In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); tools like rebase can get confused if you run the
+two together.
+
+<strong class="fragment highlight-red">Write your commit message in the imperative: "Fix bug" and not "Fixed bug"
+or "Fixes bug."</strong> This convention matches up with commit messages generated
+by commands like git merge and git revert.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, preceded by a
+  single space, with blank lines in between, but conventions vary here
+
+- Use a hanging indent</pre>
+
+						<aside class="notes">
+							Notes
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Integration mit Tools</h2>
+						<p class="fragment fade-in">
+                            JIRA
+                        </p>
+                        <p class="fragment fade-in">
+                            Jabber
+                        </p>
+                        <p class="fragment fade-in">
+                            ...
+                        </p>
+
+						<aside class="notes">
+							Notes
+						</aside>
+					</section>
+
+                    <section>
+                        <h2><a href="http://git/gitweb" target="_blank">http://git/gitweb</a></h2>
+                    </section>
+				</section>
+
+                <section>
+                    <h2>Nur Fast-Forwards</h2>
+                    <p>
+                        <code>git init --shared</code>
+                    </p>
+                    <p>
+                        initialisiert ein Repo mit
+                    </p>
+                    <p>
+                        <code>"receive.denyNonFastForwards = true"</code>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Remote Unlöschbar</h2>
+                    <p>
+                        <code>"receive.denyDeletes = true"</code>
+                    </p>
+                </section>
+
+                <section>
+                    <h2><code>git log</code> subsets</h2>
+                    <p>
+                        <code>git log branchtomerge ^master</code>
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Workflows</h2>
+                    </section>
+
+                    <section>
+                        <h2>Simple</h2>
+
+                        <p class="fragment fade-in">
+                            <code>
+                                git add .
+                            </code>
+                        </p>
+
+                        <p class="fragment fade-in">
+                            <code>
+                                git commit
+                            </code>
+                        </p>
+
+                        <p class="fragment fade-in">
+                            Commit Message.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Feature-Spezifisch Commiten</h2>
+                        <p class="fragment fade-in">
+                            <code>git status</code>
+                        </p>
+                        <p class="fragment fade-in">
+                            <code>git add filename filename filename</code>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Feingranular Commiten</h2>
+                        <p class="fragment fade-in">
+                            <code>git add -p</code>
+                        </p>
+                    </section>
+
+                    <section data-background-image="img/hunks.png" data-background-size="800px"></section>
+
+                    <section>
+                        <h2>Workflow mit Branches</h2>
+                        <p class="fragment fade-in">
+                            Branches: master, dev, feature-***, bug-***, hotfix-***
+                        </p>
+                        <p class="fragment fade-in">
+                            dev und master leben für immer
+                        </p>
+                        <p class="fragment fade-in">
+                            feature-, bug- und hotfix-Branches werden gelöscht
+                        </p>
+                        <p class="fragment fade-in">
+                            master ist immer sauber, keine direkte Arbeit
+                        </p>
+                        <p class="fragment fade-in">
+                            Nur fast-forward commits nach master
+                        </p>
+                        <p class="fragment fade-in">
+                            dev ist der Hauptentwicklungsbranch
+                        </p>
+                        <p class="fragment fade-in">
+                            dev -> release -> master
+                        </p>
+                    </section>
+
+                    <section data-background-image="img/gitflow.png"
+                             data-background-size="500px">
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Schlusswort</h2>
+                    <p class="fragment roll-in">
+                        Git muss verstanden werden
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Investierte Zeit, zahlt sich definitiv aus
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Nimmt uns Arbeit ab
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Erhöht Versionierungqualität
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Hilft uns die Codebasis zu verbessern
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Einfach rumspielen!
+                    </p>
+
+                    <p class="fragment roll-in">
+                        Sonst Fragen, Git Know-How ist da
+                    </p>
+
+                </section>
+
+                <section>
+                    <h2>Links</h2>
+                    <p>
+                    <strong>Scott Chacon's Git Einführung</strong><br>
+                    <a href="http://www.youtube.com/watch?v=ZDR433b0HJY">
+                        Video
+                    </a> &amp; <a href="https://speakerdeck.com/schacon/introduction-to-git">
+                        Slides
+                    </a>
+
+                    </p>
+                    <p>
+                        <strong>Git Bücher (free online)</strong><br>
+                        <a href="http://git-scm.com/book">
+                            Pro Git
+                        </a> &amp; <a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/">
+                            Git Magic
+                        </a>
+                    </p>
+
+                    <p>
+                        <strong>Git Webseite</strong><br>
+                        <a href="http://git-scm.com">git-scm.com</a>
+                    </p>
+
+                    <p>
+                        <strong>Wichtige Artikel &amp; ein Video</strong><br>
+                        <a href="https://vimeo.com/49444883">
+                            Advanced Git mit Tim Berglund
+                        </a><br>
+                        <a href="http://nvie.com/git-model/">
+                            A successful Git branching model
+                        </a><br>
+                        <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">
+                            A Note About Git Commit Messages
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h1>? / &#8623;</h1>
+                </section>
+
+				<!-- Ende: Best Practices -->
+
+                <section>
+                    <h1>Bonus</h1>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Reset vs Checkout</h2>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Branches, Tags</p>
+                        <p>Überschreiben von lokalen Änderungen mit <code>--force</code></p>
+                        <p>Setzt HEAD um</p>
+                        <pre>
+                        <code>
+git checkout master
+git checkout v1.0
+git checkout c10b9
+                        </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Kopieren von Files aus der History in das Working Directory</p>
+                        <p><code>git checkout c10b9 files</code></p>
+                    </section>
+                    <section>
+                        <h3>Checkout</h3>
+                        <p>Auschecken von Commit ohne Referenz: Detached Mode</p>
+                        <p>Trotzdem erzeugen von Commits möglich</p>
+                        <p>Diese sind in der History nicht sichtbar</p>
+                        <p>Nachträgliches Erstellen von Branch</p>
+                        <p>... oder cherry pick, rebasen, merging...</p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Unstagen von Änderungen:</p><p><code>git add file; git reset file</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Verschiebt HEAD von Branch auf andere Position</p>
+                        <br />
+                        <p>Ohne Wegwerfen von Änderungen: <code>--soft</code> </p>
+                        <p>Übersprungene Commits als Änderungen angezeigt</p>
+                        <br />
+                        <p>Mit Wegwerfen von Änderungen: <code>--hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Reset</h3>
+                        <p>Wegwerfen lokaler Änderungen / Leeren der Stage:</p>
+                        <p><code>git reset --hard</code></p>
+                    </section>
+                    <section>
+                        <h3>Clean</h3>
+                        <p><code>git clean</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>History vs Reflog</h2>
+                    </section>
+                    <section>
+                        <h3>History</h3>
+                        <p>Zeigt alle durch Referenzen erreichbare Commits + deren History</p>
+                        <p><code>git log</code></p>
+                    </section>
+                    <section>
+                        <h3>Reflog</h3>
+                        <p>Zeigt <b>alle</b> Commits</p>
+                        <br />
+                        <p><code>git reflog</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Stashing</h2></section>
+                    <section>
+                        <h3>Stashing</h3>
+                        <p>Wegpacken von lokalen Änderungen</p>
+                        <p>Erzeugt unsichtbaren Spezialcommit</p>
+                        <p>Nutzbar z.B. als lokale History</p>
+                        <br />
+                        <p><code>git stash save -u "message"</code></p>
+                        <p><code>git stash list</code></p>
+                        <p><code>git stash apply stash@{1}</code></p>
+                    </section>
+                </section>
+                <section>
+                    <section><h2>Submodules</h2></section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Einbinden von anderen Repositories</p>
+                        <p>z.B. Vendor-Libs, Plugins, ...</p>
+                    </section>
+                    <section>
+                        <h3>Submodules</h3>
+                        <p>Referenziert gezielt einen Commit aus Repo an URL</p>
+                        <p>Super-Repo enthält eigenen Code + referenziert Subrepos an bestimmten Stand</p>
+                        <br />
+                        <h4>Versionierung von Releases</h4>
+                        <p>Mithilfe Submodules: Version 1.0 von Plugin A,<br />Version 2.1 von Modul B</p>
+                        <p>Hauptrepository taggen</p>
+                        <p>Dann möglich: <code>git checkout release-v1.1</code></p>
+                    </section>
+                </section>
+
+			</div>
 
 		</div>
 
-		<script>
-		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
 
-		  ga('create', 'UA-43375306-1', 'revealjs.com');
-		  ga('send', 'pageview');
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
 		</script>
+
 	</body>
 </html>
